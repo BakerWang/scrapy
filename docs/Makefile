@@ -10,7 +10,8 @@ PAPER        =
 SOURCES      =
 SHELL        = /bin/bash
 
-ALLSPHINXOPTS = -b $(BUILDER) -d build/doctrees -D latex_paper_size=$(PAPER) \
+ALLSPHINXOPTS = -b $(BUILDER) -d build/doctrees \
+                -D latex_elements.papersize=$(PAPER) \
                 $(SPHINXOPTS) . build/$(BUILDER) $(SOURCES)
 
 .PHONY: help update build html htmlhelp clean
@@ -80,6 +81,9 @@ pydoc-topics: BUILDER = pydoc-topics
 pydoc-topics: build
 	@echo "Building finished; now copy build/pydoc-topics/pydoc_topics.py " \
 	      "into the Lib/ directory"
+
+coverage: BUILDER = coverage
+coverage: build
 
 htmlview: html
 	 $(PYTHON) -c "import webbrowser, os; webbrowser.open('file://' + \
